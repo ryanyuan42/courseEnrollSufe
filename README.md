@@ -5,6 +5,7 @@ Hi, this project is mainly aiming at helping SUFE students get enrolled.
 This is a unfinished project with a lot of places to modify. It requires:
  * ```requests```
  * ```bs4```
+It is build under ```Python3```, but also work under ```Python2``` (tested).
 
 If you are interested, you can clone the project and test it and modify it.
 
