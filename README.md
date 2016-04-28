@@ -2,8 +2,11 @@
 
 Hi, this project is mainly aiming at helping SUFE students get enrolled.
 
-This is a unfinished project with a lot of places to modify.
-If you are interested, you may clone the project and test it and modify it.
+This is a unfinished project with a lot of places to modify. It requires:
+ * ```requests```
+ * ```bs4```
+
+If you are interested, you can clone the project and test it and modify it.
 
 Currently, it will send msg to your email address if anything happened. I don't think it helps any though...
 
