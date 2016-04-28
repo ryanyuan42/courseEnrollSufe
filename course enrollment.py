@@ -14,7 +14,7 @@ class Course_enrollment:
     So now your wanted course is already full, otherwise, you wouldn't want to use this.
     Esesstially, you need to feed in the course id and the v variable to get you enrolled.
     """
-    def __init__(self, username = '2013121578', password = '1996yts117' ):
+    def __init__(self, username = '2013121578', password = yourpassword ):
         # initialize the enrollment helper by logging into the system
         # And reach to the selectCourse page.
         self.s = requests.session()
