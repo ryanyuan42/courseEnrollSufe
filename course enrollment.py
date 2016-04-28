@@ -1,7 +1,6 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-from pause import pause
 from sender import Sender
 import time
 
