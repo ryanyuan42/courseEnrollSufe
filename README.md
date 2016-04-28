@@ -27,8 +27,11 @@ For getting enrolled in a course, there are two strategies:
  * But I think it's pretty simple and can be done in a few codes.
 
 First, get the id of a course, which can be something you feed in the program
+
 Second, use crawler to get the limit students number(ln) and current students number(cn) of the course.
+
 Third, if ln > cn, enroll in it.
+
 Fourth, if not, return to second step.
 
 
