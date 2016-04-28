@@ -1,8 +1,10 @@
 # courseEnrollSufe
 
-Hi, this project is mainly aiming at helping SUFE students get enrolled.
+Hi, this project is mainly aiming at helping SUFE students get enrolled. 
 
-This is a unfinished project with a lot of places to modify. It requires:
+This is a unfinished project with a lot of places to modify. And very likely, it is embeded with certain amounts of bugs. But for the tests so far, it realized what I want.
+
+This project requires third library to perform, including:
  * ```requests```
  * ```bs4```
 
