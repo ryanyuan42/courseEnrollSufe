@@ -39,12 +39,18 @@ class Course_enrollment:
         self.s.get('http://eams.sufe.edu.cn/eams/stdElectCourse!defaultPage.action?electionProfile.id=2084')
     
     def update_names(self):
+        # update the course name that can be 
         res = self.s.get("http://eams.sufe.edu.cn/eams/stdElectCourse!data.action?profileId=2084").content.decode('utf-8')
         courseName = re.findall(re.compile(r'(name:\')(.*?)\','), res[18:])
         self.courseNames = {content[1] for content in courseName}
         return self.courseNames
     
-    def enroll(self, id, v):
+    def enroll(self, id, v): 
+        # here is the problem
+        # The program cannot discover id and v itself.
+        # Or I didn't come up with a way to find them in the .js files in the sufe enrollment page.
+        # Lukily we can find id and v manually, which is a stupid way.
+        
         key_url = "http://eams.sufe.edu.cn/eams/stdElectCourse!batchOperator.action?profileId=2084&electLessonIds=" + str(id) +"&withdrawLessonIds=&v=" + str(v)
         msg = self.s.get(key_url).content
         return re.findall(re.compile('(\t{4})(.*?)(</br>)'), msg)[0][1]
@@ -54,19 +60,35 @@ class Course_enrollment:
             return True
         else:
             return False
+    
+    # missing part:
+    # For getting enrolled in a course, there are two strategies:
+    # One, waiting the course to be released and be the first one to get enrolled, which is what I've already realized.
+    # Two, cannot get enrolled right now, so wait until there are more room in this course and be the first one to get enrolled.
+    # The second strategy is not realized yet.
+    # But I think it's pretty simple and can be done in a few codes.
+    
+    # First, get the id of a course, which can be something you feed in the program
+    # Second, use crawler to get the limit students number(ln) and current students number(cn) of the course.
+    # Third, if ln > cn, enroll in it.
+    # Fourth, if not, return to second step.
 
 if __name__ == "__main__":
     ryan_helper = Course_enrollment()
-    wanted_course = ['深度学习中的优化算法', '大数据金融', '量化定价策略']
+    wanted_course = ['深度学习中的优化算法', '大数据金融', '量化定价策略'] # the course you may want to select
     ryan_helper.update_names()
 
     sender = Sender(youremailaddress, youremailpwd)
-
+    
+    #####################################################################
+    ## Just to print all the classes in the beginning for you to check.##
+    #####################################################################
     print('##############')
     print('当前开放课程: ')
     for course in ryan_helper.courseNames:
         print(course)
     print('##############')
+    ### End checking  ###
     
     detect = False
     while not detect:
@@ -83,7 +105,7 @@ if __name__ == "__main__":
                 res = ryan_helper.check(course)
                 if res:
                     print("%s : 开放" %(course))
-                    
+                    # send you an email if the course you wanted is open for selection.
                     sender.createMsg(body = "%s 已开放" %(course), subject = '选课提醒')
                     sender.sendmail()
                     detect = True
